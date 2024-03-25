@@ -1,9 +1,30 @@
+import math
 #simple vectors classes 
 class vec2:
     def __init__(self, x, y) -> None:
         self.x = x
         self.y = y
+    def zero():
+        return vec2(0,0)
+    def one():
+        return vec2(1,1)
 
+    def Distance(self, other):
+        return (self - other).magnitude()
+    
+    def cross(self , other):
+        return (self.x * other.y )- (self.y * other.x)
+    def magnitude(self):
+        return math.sqrt(self.x* self.x + self.y * self.y)
+    def sqrMag(self):
+        return self.x* self.x + self.y * self.y
+    def normalized(self):
+        mag = self.magnitude
+        if mag == 0:
+            return self 
+        return self/ mag
+    def Perpendicular(self):
+        return vec2(-self.y, self.x)
 
     def  __eq__(self, other):
         return self.x == other.x and self.y == other.y
