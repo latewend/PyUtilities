@@ -19,7 +19,7 @@ class vec2:
     def sqrMag(self):
         return self.x* self.x + self.y * self.y
     def normalized(self):
-        mag = self.magnitude
+        mag = self.magnitude()
         if mag == 0:
             return self 
         return self/ mag
@@ -35,7 +35,7 @@ class vec2:
     def __mul__(self, other):
         return vec2(self.x * other, self.y * other)
     def __truediv__(self, other):
-        return vec2(self.x.__truediv__(other), self.y.__truediv__(other))
+        return vec2(self.x / other, self.y / other)
     def __floordiv__(self, other):
         return vec2(self.x.__floordiv__(other), self.y.__floordiv__(other))
     def __mod__(self, other):
@@ -52,6 +52,24 @@ class vec3:
         self.x = x
         self.y = y
         self.z = z
+    
+    def zero():
+        return vec3(0,0,0)
+    def one():
+        return vec3(1,1,1)
+
+    def Distance(self, other):
+        return (self - other).magnitude()
+    
+    def magnitude(self):
+        return math.sqrt(self.x* self.x + self.y * self.y + self.z * self.z)
+    def sqrMag(self):
+        return self.x* self.x + self.y * self.y + self.z * self.z
+    def normalized(self):
+        mag = self.magnitude()
+        if mag == 0:
+            return self 
+        return self/ mag
 
     def  __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.z == other.z
@@ -62,8 +80,7 @@ class vec3:
     def __mul__(self, other):
         return vec3(self.x * other, self.y * other,  self.z * other)
     def __truediv__(self, other):
-        return vec3(self.x.__truediv__(other), self.y.__truediv__(other)
-                    ,self.z.__truediv__(other))
+        return vec3(self.x / other, self.y / other ,self.z/ other)
     def __floordiv__(self, other):
         return vec3(self.x.__floordiv__(other), self.y.__floordiv__(other)
                     ,self.z.__floordiv__(other))
@@ -83,6 +100,24 @@ class vec4:
         self.z = z
         self.w = w
 
+    def zero():
+        return vec3(0,0,0,0)
+    def one():
+        return vec3(1,1,1,1)
+
+    def Distance(self, other):
+        return (self - other).magnitude()
+    
+    def magnitude(self):
+        return math.sqrt(self.x* self.x + self.y * self.y + self.z * self.z + self.w * self.w)
+    def sqrMag(self):
+        return self.x* self.x + self.y * self.y + self.z * self.z + self.w * self.w
+    def normalized(self):
+        mag = self.magnitude()
+        if mag == 0:
+            return self 
+        return self/ mag
+
     def  __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.z == other.z and self.w == other.w
     def __add__(self, other):
@@ -92,8 +127,7 @@ class vec4:
     def __mul__(self, other):
         return vec4(self.x * other, self.y * other,  self.z * other,  self.w * other)
     def __truediv__(self, other):
-        return vec4(self.x.__truediv__(other), self.y.__truediv__(other)
-                    ,self.z.__truediv__(other), self.w.__truediv__(other))
+        return vec4(self.x / other, self.y / (other) ,self.z / (other), self.w / (other))
     def __floordiv__(self, other):
         return vec4(self.x.__floordiv__(other), self.y.__floordiv__(other)
                     ,self.z.__floordiv__(other), self.w.__floordiv__(other))
@@ -105,3 +139,10 @@ class vec4:
         return vec4( abs(self.x) , abs(self.y), abs(self.z), abs(self.w))
     def __str__ (self):
         return "vec4: " +  str(self.x) + " " + str(self.y) + " " + str(self.z) + " " + str(self.w)
+    
+def test():
+    print(vec2.zero().normalized())
+    print(vec2(1,4).magnitude())
+
+if __name__ == "__main__":
+    test()
